@@ -1,0 +1,46 @@
+{
+	"cookies": [
+		{
+			"sameSite": "Strict",
+			"name": ".Nop.Antiforgery",
+			"value": "CfDJ8K5ZJ_fvx_lHg-2EHjkH9lTZMB5pzTpB5gdpEeyp5HpZq3puKFmO0Z6BXM_FIWcBSFkYLxuin0haGBxgBJ-BSofvFbRlwYNc1rvPANxcRVqBP-TNPoqrixL58noblnuQnlzcvp267fe1xV989fza-bQ",
+			"domain": "admin-demo.nopcommerce.com",
+			"path": "/",
+			"expires": -1,
+			"httpOnly": true,
+			"secure": true
+		},
+		{
+			"sameSite": "Lax",
+			"name": ".Nop.Authentication",
+			"value": "CfDJ8K5ZJ_fvx_lHg-2EHjkH9lTG6B6xJAvvJexTVv1gASTtBCrDXxW7zngA4UQVT96sMDQ-OYG_Gt6zxuwOTVmvfR0sVrDXYq75fu7Qdu3G0HtdI2m32mU-RFm3q7Epl2UMrhWFJdWojfkqkHyHne7lbg3brrd7X0_Zfp_vwQ0ScneE__nqvAb8bPvKhE74onW0gedXgWX6iRBxAqll00eIadgPvMvXy5zx_QoK6o4JUDo2pporYfvm40vhlre5MCKMSzCLOZcfHQPHikQaTWhEQPxYtUpoL9MFZivS76yC72J2Nf6jsrqUx5Ker26b_iV4RzOfZW_6ZBmRGYCF_0X4_L_VMvn-dRZrq5jJZ1Jn47_4FVvZxzKvTGjmhUoKFNuuhBKemnb0aygBnJtLOMe4YEQ4WLsNDcsuZP5y49Zw8XEMtgIKrfHBYJ6uNPks2ddqmx2_8J-PQs7zUIt_Q4RV1GDTZ1huwy6HwTznnRtTBZZBNF4WDahIjDHBEXvtYe_MRBg_Anf0EysTBq7ncpOsJn1unSn4xfYoS_UAFszV4IsAclx-FZV4HsB4yBqJL9MDLQ",
+			"domain": "admin-demo.nopcommerce.com",
+			"path": "/",
+			"expires": -1,
+			"httpOnly": true,
+			"secure": true
+		},
+		{
+			"sameSite": "Lax",
+			"name": ".Nop.Customer",
+			"value": "345253c6-4cb0-4a42-8515-a3f1f2ab5f57",
+			"domain": "admin-demo.nopcommerce.com",
+			"path": "/",
+			"expires": 1684987112.458422,
+			"httpOnly": true,
+			"secure": true
+		},
+		{
+			"sameSite": "Lax",
+			"name": ".Nop.Culture",
+			"value": "c%3Den-US%7Cuic%3Den-US",
+			"domain": "admin-demo.nopcommerce.com",
+			"path": "/",
+			"expires": 1684987112.458671,
+			"httpOnly": false,
+			"secure": false
+		}
+	],
+	"origins": [
+	]
+}
