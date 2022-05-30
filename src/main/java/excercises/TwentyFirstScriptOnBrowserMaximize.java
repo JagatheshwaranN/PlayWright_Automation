@@ -9,7 +9,7 @@ import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
-public class TwentyOnethScriptOnBrowserMaximize {
+public class TwentyFirstScriptOnBrowserMaximize {
 
 	public static void main(String[] args) {
 
@@ -23,7 +23,7 @@ public class TwentyOnethScriptOnBrowserMaximize {
 				.newContext(new Browser.NewContextOptions().setViewportSize(width, height));
 		Page page = browserContext.newPage();
 		page.navigate("https://whatismyviewport.com/");
-		
+
 		browser.close();
 		playwright.close();
 
