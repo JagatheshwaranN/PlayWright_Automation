@@ -6,28 +6,28 @@
     <groups>
     </groups>
     <test name="Default test" duration-ms="12744" started-at="2022-06-03T03:48:39Z" finished-at="2022-06-03T03:48:52Z">
-      <class name="excercises.TwentyFifthScriptOnAPIAutomation">
-        <test-method status="PASS" signature="setup()[pri:0, instance:excercises.TwentyFifthScriptOnAPIAutomation@29ba4338]" name="setup" is-config="true" duration-ms="10371" started-at="2022-06-03T03:48:39Z" finished-at="2022-06-03T03:48:49Z">
+      <class name="excercises.APIAutomation">
+        <test-method status="PASS" signature="setup()[pri:0, instance:excercises.APIAutomation@29ba4338]" name="setup" is-config="true" duration-ms="10371" started-at="2022-06-03T03:48:39Z" finished-at="2022-06-03T03:48:49Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method status="PASS" signature="deleteCall()[pri:0, instance:excercises.TwentyFifthScriptOnAPIAutomation@29ba4338]" name="deleteCall" duration-ms="764" started-at="2022-06-03T03:48:49Z" finished-at="2022-06-03T03:48:50Z">
+        <test-method status="PASS" signature="deleteCall()[pri:0, instance:excercises.APIAutomation@29ba4338]" name="deleteCall" duration-ms="764" started-at="2022-06-03T03:48:49Z" finished-at="2022-06-03T03:48:50Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- deleteCall -->
-        <test-method status="PASS" signature="getCall()[pri:0, instance:excercises.TwentyFifthScriptOnAPIAutomation@29ba4338]" name="getCall" duration-ms="409" started-at="2022-06-03T03:48:50Z" finished-at="2022-06-03T03:48:51Z">
+        <test-method status="PASS" signature="getCall()[pri:0, instance:excercises.APIAutomation@29ba4338]" name="getCall" duration-ms="409" started-at="2022-06-03T03:48:50Z" finished-at="2022-06-03T03:48:51Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- getCall -->
-        <test-method status="PASS" signature="postCall()[pri:0, instance:excercises.TwentyFifthScriptOnAPIAutomation@29ba4338]" name="postCall" duration-ms="575" started-at="2022-06-03T03:48:51Z" finished-at="2022-06-03T03:48:51Z">
+        <test-method status="PASS" signature="postCall()[pri:0, instance:excercises.APIAutomation@29ba4338]" name="postCall" duration-ms="575" started-at="2022-06-03T03:48:51Z" finished-at="2022-06-03T03:48:51Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- postCall -->
-        <test-method status="PASS" signature="putCall()[pri:0, instance:excercises.TwentyFifthScriptOnAPIAutomation@29ba4338]" name="putCall" duration-ms="578" started-at="2022-06-03T03:48:51Z" finished-at="2022-06-03T03:48:52Z">
+        <test-method status="PASS" signature="putCall()[pri:0, instance:excercises.APIAutomation@29ba4338]" name="putCall" duration-ms="578" started-at="2022-06-03T03:48:51Z" finished-at="2022-06-03T03:48:52Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- putCall -->
-      </class> <!-- excercises.TwentyFifthScriptOnAPIAutomation -->
+      </class> <!-- excercises.APIAutomation -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
