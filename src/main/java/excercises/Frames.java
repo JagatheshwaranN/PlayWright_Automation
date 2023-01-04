@@ -6,6 +6,8 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Frame;
+import com.microsoft.playwright.FrameLocator;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
@@ -24,8 +26,17 @@ public class Frames {
 		String header;
 		header = page.frameLocator("frame[name='main']").locator("h2").textContent();
 		System.out.println(header);
-
+		
 		header = page.frame("main").locator("h2").textContent();
+		System.out.println(header);
+		
+		FrameLocator frameLoc = page.frameLocator("frame[name='main']");
+		header = frameLoc.getByText("Title bar (top.html)").textContent();
+		System.out.println(header);
+		
+		Locator loc = page.locator("frame[name='main']");
+		FrameLocator frameLocator = loc.frameLocator(":scope");
+		header = frameLocator.getByText("Title bar (top.html)").textContent();
 		System.out.println(header);
 
 		page.navigate("https://www.formsite.com/templates/registration-form-templates/vehicle-registration-form/");
@@ -44,7 +55,7 @@ public class Frames {
 		childs.get(1).fill("input[name='email']", "Automation");
 		
 		childs.get(0).parentFrame().fill("input[name='lname']", "Testing");
-		
+				
 		browser.close();
 		playwright.close();
 	}
