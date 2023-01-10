@@ -13,14 +13,11 @@ public class MouseOperations {
 
 	static Playwright playwright;
 
-	public static Page before() {
+	public static void main(String[] args) {
 
-		playwright = Playwright.create();
-		Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
-		BrowserContext browserContext = browser.newContext();
-		Page page;
-		page = browserContext.newPage();
-		return page;
+		doubleClick();
+		rightClick();
+		mouseOver();
 	}
 
 	public static void doubleClick() {
@@ -56,10 +53,14 @@ public class MouseOperations {
 
 	}
 
-	public static void main(String[] args) {
+	public static Page before() {
 
-		doubleClick();
-		rightClick();
-		mouseOver();
+		playwright = Playwright.create();
+		Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+		BrowserContext browserContext = browser.newContext();
+		Page page;
+		page = browserContext.newPage();
+		return page;
 	}
+
 }

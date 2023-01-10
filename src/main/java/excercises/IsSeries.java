@@ -14,6 +14,12 @@ public class IsSeries {
 		Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
 		BrowserContext browserContext = browser.newContext();
 		Page page = browserContext.newPage();
+		
+		page.navigate("https://courses.letskodeit.com/practice");
+		page.locator("#hide-textbox").click();
+		boolean hidden = page.locator("#displayed-text").isHidden();
+		System.out.println(hidden);
+		
 		page.navigate("https://letcode.in/edit");
 		
 		boolean editable1 = page.locator("#join").isEditable();

@@ -41,11 +41,21 @@ public class MouseAndKeyBoardActions {
 		page.close();
 		playwright.close();
 	}
+	
+	public static void insert() {
+		Page page = before();
+		page.navigate("https://letcode.in/edit");
+		page.click("#fullName");
+		page.keyboard().insertText("嗨");
+		page.close();
+		playwright.close();
+	}
 
 	public static void main(String[] args) {
 
 		clickAndHold();
 		mouseAndKeyboardAction();
+		insert();
 
 	}
 
