@@ -10,6 +10,7 @@ import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.options.ScreenshotCaret;
 
 public class Screenshot_Mask {
 
@@ -41,6 +42,12 @@ public class Screenshot_Mask {
 		
 		page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("maskpage.png")).setMask(locators));
 		
+		page.locator(".DocSearch.DocSearch-Button").click();
+		
+		//Screenshot with Caret
+		page.screenshot(new Page.ScreenshotOptions().setCaret(ScreenshotCaret.INITIAL).setPath(Paths.get("Caret.png")));
+		
+			
 		page.close();
 		browserContext.close();
 		browser.close();
