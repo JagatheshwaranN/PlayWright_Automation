@@ -49,7 +49,5 @@ public class Cookies {
 			System.out.println(c.name + " | " + c.value + " | " + c.domain + " | " + c.path + " | " + c.url + " | "
 					+ c.expires + " | " + c.httpOnly + " | " + c.sameSite + " | " + c.secure);
 		}
-		
-
 	}
 }

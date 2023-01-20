@@ -17,6 +17,7 @@ public class WaitsInPlaywright {
 		Browser browser = playwright.chromium()
 				.launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(100));
 		BrowserContext browserContext = browser.newContext();
+		browserContext.setDefaultTimeout(5000);
 		Page page = browserContext.newPage();
 
 		page.navigate("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",

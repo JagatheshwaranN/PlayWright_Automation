@@ -46,13 +46,10 @@ public class Screenshot_Mask {
 		
 		//Screenshot with Caret
 		page.screenshot(new Page.ScreenshotOptions().setCaret(ScreenshotCaret.INITIAL).setPath(Paths.get("Caret.png")));
-		
 			
 		page.close();
 		browserContext.close();
 		browser.close();
 		playwright.close();
-
 	}
-
 }
