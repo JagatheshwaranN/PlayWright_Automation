@@ -11,8 +11,10 @@ public class Browsers {
 	public static void main(String[] args) {
 
 		Playwright playwright = Playwright.create();
-		Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+		BrowserType browserType = playwright.chromium();
+		Browser browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(false));
 		System.out.println("Browser Connect Status : " + browser.isConnected());
+		System.out.println("Browser Name : " + browserType.name());
 		System.out.println("Browser Version : " + browser.version());
 		System.out.println("Browser Context Count : " + browser.contexts().size());
 		BrowserContext browsercontext1 = browser.newContext();
@@ -27,6 +29,6 @@ public class Browsers {
 		browsercontext1.close();
 		browsercontext2.close();
 		browser.close();
-
+		playwright.close();
 	}
 }

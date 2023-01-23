@@ -39,6 +39,8 @@ public class DownloadFile {
 
 		downloadFile.saveAs(Paths.get("ChromeDriver.Zip"));
 		System.out.println(downloadFile.suggestedFilename());
+		
+		// downloadFile.createReadStream();
 
 		browser.close();
 		playwright.close();

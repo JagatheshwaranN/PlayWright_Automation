@@ -23,6 +23,7 @@ public class GeoLocation {
 		page.click("a[aria-label='Show My Location']");
 		page.waitForTimeout(10000);
 		page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get("geolocation.png")));
+		browserContext.clearPermissions();
 		page.close();
 		browserContext.close();
 		playwright.close();

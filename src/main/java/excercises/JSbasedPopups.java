@@ -9,24 +9,23 @@ import com.microsoft.playwright.Dialog;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
-
 public class JSbasedPopups {
 
-	
 	public static Page before() {
 		Playwright playwright = Playwright.create();
 		Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
 		BrowserContext browserContext = browser.newContext();
 		Page page;
 		page = browserContext.newPage();
-		return page;		
+		return page;
 	}
-	
+
 	public static void simpleAlert() {
 		Page page = before();
 		page.onDialog(dialog -> {
 			String text = dialog.message();
 			System.out.println(text);
+			System.out.println(dialog.type());
 			dialog.accept();
 		});
 		String result;
@@ -37,7 +36,7 @@ public class JSbasedPopups {
 		page.close();
 
 	}
-	
+
 	public static void confirmAlert() {
 		Page page = before();
 		page.onDialog(dialog -> {
@@ -52,7 +51,7 @@ public class JSbasedPopups {
 		System.out.println(result);
 		page.close();
 	}
-	
+
 	public static void promptAlert() {
 		Page page = before();
 		page.onDialog(dialog -> {
@@ -70,7 +69,8 @@ public class JSbasedPopups {
 		System.out.println(result);
 		page.close();
 	}
-	
+
+	// Not working - Popup accept clicked, but getting timeout error.
 	public static void waitAlert() {
 		Page page = before();
 		page.onDialog(dialog -> {
@@ -84,13 +84,13 @@ public class JSbasedPopups {
 		});
 		page.close();
 	}
-	
+
 	public static void main(String[] args) {
-		
-		// simpleAlert();
-		// confirmAlert();
-		// promptAlert();
-		// waitAlert();
+
+		simpleAlert();
+		confirmAlert();
+		promptAlert();
+		waitAlert();
 
 		Playwright playwright = Playwright.create();
 		Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
@@ -98,8 +98,8 @@ public class JSbasedPopups {
 		Page page;
 		page = browserContext.newPage();
 		page.navigate("https://letcode.in/alert");
-		
-		Consumer<Dialog> alert = new Consumer<Dialog>(){
+
+		Consumer<Dialog> alert = new Consumer<Dialog>() {
 			public void accept(Dialog dialog) {
 				String text = dialog.message();
 				System.out.println(text);
@@ -109,7 +109,7 @@ public class JSbasedPopups {
 		};
 		page.onDialog(alert);
 		page.locator("#accept").click();
-		
+
 		page.onDialog(dialog -> {
 			String text = dialog.message();
 			System.out.println(text);
