@@ -10,6 +10,7 @@ import com.microsoft.playwright.Playwright;
 import com.microsoft.playwright.Response;
 import com.microsoft.playwright.options.HttpHeader;
 import com.microsoft.playwright.options.LoadState;
+import com.microsoft.playwright.options.Timing;
 
 public class Request {
 
@@ -21,8 +22,8 @@ public class Request {
 		Page page = browserContext.newPage();
 		System.out.println("***************");
 		page.onRequest(request -> System.out.println(">>" + request.headers()));
-//		page.onRequest(request -> System.out.println("Content : " + request.headerValue("content-type")));
-//		page.onRequest(request -> System.out.println("User Agent : " + request.headerValue("user-agent")));
+		page.onRequest(request -> System.out.println("Content : " + request.headerValue("content-type")));
+		page.onRequest(request -> System.out.println("User Agent : " + request.headerValue("user-agent")));
 		System.out.println("***************");
 		page.onRequest(request -> {
 			List<HttpHeader> arr = request.headersArray();
@@ -40,6 +41,19 @@ public class Request {
 		page.onRequest(request -> {
 			System.out.println("Request Post Data : " + request.postData());
 			System.out.println("Request Post Data Buffer : " + request.postDataBuffer());
+			System.out.println("Request Data Type : " + request.resourceType());
+			System.out.println("Response Data : " + request.response().status());
+			System.out.println("Request BSize : " + request.sizes().requestBodySize);
+			System.out.println("Request HSize : " + request.sizes().requestHeadersSize);
+			System.out.println("Response BSize : " + request.sizes().responseBodySize);
+			System.out.println("Response HSize : " + request.sizes().responseHeadersSize);
+		});
+
+		page.onRequestFinished(request -> {
+			Timing time = request.timing();
+			System.out.println("Request Url : " + request.url());
+			System.out.println("Time : " + (time.responseEnd - time.responseStart));
+			System.out.println("Time : " + (time.connectEnd - time.connectStart));
 		});
 		System.out.println("***************");
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
@@ -50,7 +64,5 @@ public class Request {
 		page.close();
 		browserContext.close();
 		playwright.close();
-
 	}
-
 }
