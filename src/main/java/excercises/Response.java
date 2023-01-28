@@ -34,7 +34,11 @@ public class Response {
 			System.out.println("*********************************************");
 			System.out.println("Response Body : " + response.body().length);
 			System.out.println("*********************************************");
-
+			System.out.println("Response Frame : " + response.frame());
+			System.out.println("*********************************************");
+			System.out.println("Response Worker : " + response.fromServiceWorker());
+			System.out.println("*********************************************");
+			System.out.println("Response Status : " + response.ok());
 		});
 
 		page.navigate("https://www.google.com/");
