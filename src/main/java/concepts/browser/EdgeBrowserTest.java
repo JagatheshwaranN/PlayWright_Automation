@@ -1,12 +1,15 @@
 package concepts.browser;
 
 import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
-public class ChromiumBrowserTest {
+public class EdgeBrowserTest {
 
     Playwright playwright;
 
@@ -17,12 +20,12 @@ public class ChromiumBrowserTest {
     @BeforeTest
     public void setup() {
         playwright = Playwright.create();
-        browser = playwright.chromium().launch();
+        browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setChannel("msedge"));
         page = browser.newPage();
     }
 
     @Test
-    public void testChromiumBrowser() {
+    public void testChromeBrowser() {
         String expectedTitle = "Google";
         page.navigate("https://www.google.com/");
         String actualTitle = page.title();

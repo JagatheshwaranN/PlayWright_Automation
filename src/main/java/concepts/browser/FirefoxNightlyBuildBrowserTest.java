@@ -4,9 +4,11 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
-public class ChromiumBrowserTest {
+public class FirefoxNightlyBuildBrowserTest {
 
     Playwright playwright;
 
@@ -17,12 +19,12 @@ public class ChromiumBrowserTest {
     @BeforeTest
     public void setup() {
         playwright = Playwright.create();
-        browser = playwright.chromium().launch();
+        browser = playwright.firefox().launch();
         page = browser.newPage();
     }
 
     @Test
-    public void testChromiumBrowser() {
+    public void testFirefoxNightlyBuildBrowser() {
         String expectedTitle = "Google";
         page.navigate("https://www.google.com/");
         String actualTitle = page.title();
