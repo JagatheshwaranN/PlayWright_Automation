@@ -1,15 +1,13 @@
-package concepts.browser;
+package concepts.browser.launch;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-public class EdgeBrowserTest {
+public class ChromiumBrowserHeadModeTest {
 
     // Declaration of Playwright, Browser, and Page instances
     Playwright playwright;
@@ -19,20 +17,17 @@ public class EdgeBrowserTest {
     Page page;
 
     // Setup method to initialize test environment
-    @BeforeTest
     public void setup() {
         try {
             // Create a Playwright object to manage browser interactions
             playwright = Playwright.create();
 
-            // Create a new browser instance using Playwright's Chromium browser
+            // Create a new instance of the Chromium browser using Playwright
             browser = playwright.chromium().launch(
-                    // Configure launch options for the browser
+                    // Configure the launch options for the browser session
                     new BrowserType.LaunchOptions()
                             // Set headless mode as false to make the browser visible
                             .setHeadless(false)
-                            // Specify the browser channel to use "msedge" (stable)
-                            .setChannel("msedge")
             );
 
             // Create a new page within the browser
@@ -45,7 +40,7 @@ public class EdgeBrowserTest {
 
     // Test method to check the title of the Google webpage
     @Test
-    public void testEdgeBrowser() {
+    public void testChromiumBrowserHeadMode() {
         try {
             // Set the expected title of the page
             String expectedTitle = "Google";

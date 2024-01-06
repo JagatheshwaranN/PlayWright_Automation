@@ -1,4 +1,4 @@
-package concepts.browser;
+package concepts.browser.launch;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
@@ -9,7 +9,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class FirefoxNightlyBuildBrowserHeadModeTest {
+public class WebkitBrowserHeadModeTest {
 
     // Declaration of Playwright, Browser, and Page instances
     Playwright playwright;
@@ -25,8 +25,8 @@ public class FirefoxNightlyBuildBrowserHeadModeTest {
             // Create a Playwright object to manage browser interactions
             playwright = Playwright.create();
 
-            // Create a new instance of the Firefox browser using Playwright
-            browser = playwright.firefox().launch(
+            // Create a new instance of the Webkit browser using Playwright
+            browser = playwright.webkit().launch(
                     // Configure the launch options for the browser session
                     new BrowserType.LaunchOptions()
                             // Set headless mode as false to make the browser visible
@@ -43,7 +43,7 @@ public class FirefoxNightlyBuildBrowserHeadModeTest {
 
     // Test method to check the title of the Google webpage
     @Test
-    public void testFirefoxNightlyBuildBrowserHeadMode() {
+    public void testWebkitBrowserHeadMode() {
         try {
             // Set the expected title of the page
             String expectedTitle = "Google";
