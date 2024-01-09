@@ -1,22 +1,24 @@
 package concepts.browser_context;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.Cookie;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+
 /**
- * This Java code demonstrates the usage of Playwright to create a browser context,
- * add a cookie to it, navigate to a web page, and retrieve and print cookies from
- * that context.
+ * This Java code demonstrates how to create a browser context, grant specific
+ * permissions to an origin within that context, navigate a page, interact with
+ * it, and then clear the granted permissions once the operations are completed.
+ * This approach allows testing how a web application behaves under different
+ * permission scenarios.
  *
  * @author Jagatheshwaran N
  */
-public class BrowserContextAddCookieTest {
+public class BrowserContextPermissionsTest {
 
     @Test
-    public void testBrowserContextAddCookie() {
+    public void testBrowserContextPermissions() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -39,17 +41,10 @@ public class BrowserContextAddCookieTest {
             // Create a new isolated browser context.
             BrowserContext browserContext = browser.newContext();
 
-            // Create a new cookie object with the name "test" and value "auto"
-            Cookie cookie = new Cookie("test", "auto");
-
-            // Set the domain for the cookie to "example.com"
-            cookie.setDomain("example.com");
-
-            // Set the path for the cookie to "/", meaning it will be sent to all pages on the domain
-            cookie.setPath("/");
-
-            // Add the cookie to the browser context
-            browserContext.addCookies(List.of(cookie));
+            // Grant specific permissions to a given origin (https://www.example.com)
+            browserContext.grantPermissions(
+                    List.of("geolocation", "notifications", "clipboard-write", "camera"),
+                    new BrowserContext.GrantPermissionsOptions().setOrigin("https://www.example.com"));
 
             // Create a new page within the context.
             Page page = browserContext.newPage();
@@ -63,18 +58,8 @@ public class BrowserContextAddCookieTest {
             // Print the title to the console.
             System.out.println(title);
 
-            // Retrieve all cookies currently stored in the browser context
-            List<Cookie> cookies = browserContext.cookies("http://www.example.com/");  // Get cookies from the Specified URL
-
-            // Iterate through each cookie and print its name and value
-            for (Cookie cookie1 : cookies) {
-                // Print the cookie's name
-                System.out.println("Cookie Name  : " + cookie1.name);
-
-                // Print the cookie's value
-                System.out.println("Cookie Value : " + cookie1.value);
-            }
-
+            // Clear the granted permissions for the context
+            browserContext.clearPermissions();
         } catch (Exception e) {
             // Print the exception stack trace for debugging
             e.printStackTrace();

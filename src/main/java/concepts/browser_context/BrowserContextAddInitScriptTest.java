@@ -1,22 +1,30 @@
 package concepts.browser_context;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.Cookie;
 import org.testng.annotations.Test;
 
-import java.util.List;
 
 /**
- * This Java code demonstrates the usage of Playwright to create a browser context,
- * add a cookie to it, navigate to a web page, and retrieve and print cookies from
- * that context.
+ * This Java code demonstrates how to use Playwright's Java API to launch a browser,
+ * create a browser context, inject a script to modify the page behavior, navigate
+ * to a website, and perform basic interactions with the page while handling
+ * potential exceptions and properly closing resources.
+ * <p>
+ * The addInitScript method is used to inject a script into the page before other
+ * scripts execute.
+ * The injected script modifies the page's appearance by setting the background color
+ * of the body element to green (document.body.style.backgroundColor = 'green';).
+ * <p>
+ * addInitScript method is pivotal in this scenario as it allows injecting a script
+ * to manipulate the page's appearance or behavior before any other scripts are executed.
+ * <p>
  *
  * @author Jagatheshwaran N
  */
-public class BrowserContextAddCookieTest {
+public class BrowserContextAddInitScriptTest {
 
     @Test
-    public void testBrowserContextAddCookie() {
+    public void testBrowserContextAddInitScript() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -39,17 +47,11 @@ public class BrowserContextAddCookieTest {
             // Create a new isolated browser context.
             BrowserContext browserContext = browser.newContext();
 
-            // Create a new cookie object with the name "test" and value "auto"
-            Cookie cookie = new Cookie("test", "auto");
-
-            // Set the domain for the cookie to "example.com"
-            cookie.setDomain("example.com");
-
-            // Set the path for the cookie to "/", meaning it will be sent to all pages on the domain
-            cookie.setPath("/");
-
-            // Add the cookie to the browser context
-            browserContext.addCookies(List.of(cookie));
+            // Access the browser context object
+            browserContext.addInitScript(
+                    // Inject a script to execute before any page scripts
+                    "document.body.style.backgroundColor = 'green';" // Set the background color to green
+            );
 
             // Create a new page within the context.
             Page page = browserContext.newPage();
@@ -62,19 +64,6 @@ public class BrowserContextAddCookieTest {
 
             // Print the title to the console.
             System.out.println(title);
-
-            // Retrieve all cookies currently stored in the browser context
-            List<Cookie> cookies = browserContext.cookies("http://www.example.com/");  // Get cookies from the Specified URL
-
-            // Iterate through each cookie and print its name and value
-            for (Cookie cookie1 : cookies) {
-                // Print the cookie's name
-                System.out.println("Cookie Name  : " + cookie1.name);
-
-                // Print the cookie's value
-                System.out.println("Cookie Value : " + cookie1.value);
-            }
-
         } catch (Exception e) {
             // Print the exception stack trace for debugging
             e.printStackTrace();
