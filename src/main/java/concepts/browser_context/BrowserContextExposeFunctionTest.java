@@ -60,7 +60,7 @@ public class BrowserContextExposeFunctionTest {
             page.setContent("""
                         <script>
                         async function onClick() {
-                            // Call the exposed "pageURL" binding and update the div content
+                            // Call the exposed "greetMessage" function and update the div content
                             document.querySelector('div').textContent = await window.greetMessage();
                         }
                         </script>
