@@ -3,25 +3,22 @@ package concepts.browser_context;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
-import java.nio.file.Paths;
-
 /**
- * The code sets up a browser context, navigates to Google's homepage, prints the
- * page title, captures the storage state, and then closes the browser and releases
- * resources.The primary focus is to capture the storage state of the browser
- * context after interacting with a page.
+ * The code demonstrates a basic Playwright test where a browser is launched,
+ * a specific page is navigated to, a condition related to an element's visibility
+ * is waited upon, and then the title of the page is retrieved and printed. The code
+ * includes proper exception handling and resource cleanup in the finally block.
  * <p>
- * The storageState() methods in the Playwright Java API are used to capture the
- * current state of browser storage within a specific browser context. Browser
- * storage includes data such as cookies, local storage, and session storage. This
- * captured state can later be used to restore the browser to the same storage state.
+ * The waitForCondition() method is used to wait for a condition to be true before
+ * proceeding. The condition is defined as the visibility of an element with the
+ * CSS selector #subscribe_email on the page.
  *
  * @author Jagatheshwaran N
  */
-public class BrowserContextStorageStateTest {
+public class BrowserContextWaitForConditionTest {
 
     @Test
-    public void testBrowserContextStorageState() {
+    public void testBrowserContextWaitForCondition() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -47,23 +44,30 @@ public class BrowserContextStorageStateTest {
             // Set up a blank page within the established context
             Page page = browserContext.newPage();
 
-            // Send the page to the Google home page
-            page.navigate("https://www.google.com/");
+            // Send the page to the Playwright documentation for Java
+            page.navigate("https://automationexercise.com/");
+
+            /*
+                Other possible scenarios
+                ========================
+                browserContext.waitForCondition(() -> page.textContent(".my-text").equals("New text"));
+                browserContext.waitForCondition(() -> page.url().endsWith("success"));
+            */
+
+            // Pause test execution until the specified element becomes visible within the browser context
+            browserContext.waitForCondition(
+                    // Define the condition to wait for using a JavaScript predicate function
+                    () -> {
+                        // Check if the element with ID "subscribe_email" is visible on the page
+                        return page.isVisible("#subscribe_email");
+                    }
+            );
 
             // Get the title of the current page.
             String title = page.title();
 
             // Print the title to the console.
             System.out.println(title);
-
-            // Create an instance of StorageStateOptions to configure storage state capture
-            BrowserContext.StorageStateOptions options = new BrowserContext.StorageStateOptions();
-
-            // Set the path where the storage state data will be saved (use Paths.get for a file path)
-            options.setPath(Paths.get("storage//storage_data.json"));
-
-            // Capture the storage state of the current browser context with the specified options
-            browserContext.storageState(options);
         } catch (Exception e) {
             // Print the exception stack trace for debugging
             e.printStackTrace();
