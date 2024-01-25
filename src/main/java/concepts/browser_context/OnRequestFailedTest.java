@@ -42,6 +42,7 @@ public class OnRequestFailedTest {
 
             // Set up an event listener for intercepting and handling failed network requests
             browserContext.onRequestFailed(request -> {
+
                 // Print information about the failed request, including URL and failure details
                 System.err.println("Request failed: " + request.url() + " (" + request.failure() + ")");
             });
@@ -49,7 +50,7 @@ public class OnRequestFailedTest {
             // Create a new page in the browser context
             Page page = browserContext.newPage();
 
-            // Navigate the page to the Amazon India website
+            // Navigate the page to the specified URL
             page.navigate("http://httpbin.org/status/500");
 
             // Get the title of the current page.

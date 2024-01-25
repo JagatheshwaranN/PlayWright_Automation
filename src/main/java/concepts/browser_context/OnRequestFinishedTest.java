@@ -54,7 +54,7 @@ public class OnRequestFinishedTest {
             // Create a new page in the browser context
             Page page = browserContext.newPage();
 
-            // Navigate the page to the Amazon India website
+            // Navigate the page to the OrangeHRM website
             page.navigate("https://opensource-demo.orangehrmlive.com/web/index.php");
 
             // Get the title of the current page.
