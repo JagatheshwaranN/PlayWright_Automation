@@ -22,6 +22,7 @@ public class NameTest {
         try {
             // Create a Playwright instance
             try (Playwright playwright = Playwright.create()) {
+
                 // Get the Chromium browser type from Playwright
                 browserType = playwright.chromium();
 
