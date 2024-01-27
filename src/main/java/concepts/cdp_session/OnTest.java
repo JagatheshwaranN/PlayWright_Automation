@@ -2,6 +2,7 @@ package concepts.cdp_session;
 
 import com.google.gson.JsonObject;
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.LoadState;
 import org.testng.annotations.Test;
 
 /**
@@ -39,22 +40,45 @@ public class OnTest {
             Page page = context.newPage();
 
             // Create a CDP session for interacting with the browser's DevTools Protocol
-            CDPSession cdpSession = context.newCDPSession(page);
+//            CDPSession cdpSession = context.newCDPSession(page);
 
 //            cdpSession.on("Network.requestWillBeSent", event -> {
 //                System.out.println("Request URL" +event.getAsJsonObject().getAsJsonPrimitive("request").getAsJsonObject().getAsJsonPrimitive("url").getAsString());
 //            });
 
-            cdpSession.on("Network.responseReceived", event -> {
-                JsonObject response = event.getAsJsonObject("response");
-                String url = response.getAsJsonPrimitive("url").getAsString();
-                int status = response.getAsJsonPrimitive("status").getAsInt();
+//            cdpSession.on("Network.responseReceived", event -> {
+//                JsonObject response = event.getAsJsonObject("response");
+//                String url = response.getAsJsonPrimitive("url").getAsString();
+//                int status = response.getAsJsonPrimitive("status").getAsInt();
+//
+//                System.out.println("Response received - URL: " + url + ", Status: " + status);
+//            });
+//
+//            cdpSession.on("Network.requestWillBeSent", event -> {
+//                System.out.println("Request will be sent: " + event);
+//            });
 
-                System.out.println("Response received - URL: " + url + ", Status: " + status);
+            // Navigate to Amazon.in
+            page.navigate("https://www.amazon.in/");
+
+            // Wait for the page to load completely
+            page.waitForLoadState(LoadState.LOAD);
+
+            // Click on the shopping cart icon
+            page.click(".nav-cart-icon.nav-sprite");
+
+            // Attach an event handler after the navigation and click actions
+            CDPSession cdpSession = page.context().newCDPSession(page);
+            cdpSession.on("Network.requestWillBeSent", event -> {
+                System.out.println("Request will be sent: " + event);
             });
 
-            // Navigate to the Playwright website
-            page.navigate("https://opensource-demo.orangehrmlive.com/web/index.php");
+            // Wait for some time or use proper synchronization mechanisms
+            // You might need to wait for specific network events or other conditions
+
+            // Detach the event handler (optional)
+            //cdpSession.off("Network.requestWillBeSent", event);
+
         } catch (Exception ex) {
             // Print any exceptions that occur
             ex.printStackTrace();
