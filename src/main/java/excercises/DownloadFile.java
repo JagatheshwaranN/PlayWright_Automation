@@ -18,9 +18,9 @@ public class DownloadFile {
 		BrowserContext browserContext = browser.newContext();
 		Page page = browserContext.newPage();
 
-		page.navigate("https://chromedriver.storage.googleapis.com/index.html?path=102.0.5005.61/");
+		page.navigate("https://file-examples.com/index.php/sample-documents-download/sample-doc-download/");
 		Download downloadFile = page.waitForDownload(() -> {
-			page.click("a:text('chromedriver_win32.zip')");
+			page.click("(//a[contains(@href,'file-sample_1MB.doc')])[1]");
 		});
 
 		boolean flag = downloadFile.failure() == null ? false : true;
