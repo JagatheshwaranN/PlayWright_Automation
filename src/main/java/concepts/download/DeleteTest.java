@@ -8,6 +8,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * The code tests the file download functionality of a web page, using Playwright to automate
+ * the browser interactions, and includes handling for downloading and processing files.The
+ * download.delete(); comment in the code refers to a crucial step in the file download handling
+ * process.After the content of the downloaded file is processed using the processInputStream
+ * method, the code explicitly deletes the downloaded file using the delete method associated
+ * with the download object.
+ *
+ * @author Jagatheshwaran N
+ */
 public class DeleteTest {
 
     @Test

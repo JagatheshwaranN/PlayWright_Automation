@@ -3,18 +3,22 @@ package concepts.download;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
- * This code is designed to test the download functionality of a web page, specifically
- * focusing on handling download failures.Checks if the download failed by examining
- * the failure property of the Download object.Checks for download interruptions, and
- * provides appropriate feedback messages based on the outcome of the download.
+ * This code tests the download functionality of a web page, specifically a PDF file.
+ * It utilizes Playwright to automate the browser interactions, saves the downloaded file
+ * to a specified destination path using the suggested file name, and prints a
+ * confirmation message with the file path. The script includes proper exception handling
+ * and resource cleanup.
  *
  * @author Jagatheshwaran N
  */
-public class FailureTest {
+public class SuggestedFileNameTest {
 
     @Test
-    public void testDownloadFailure() {
+    public void testDownloadSuggestedFileName() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -43,25 +47,21 @@ public class FailureTest {
             // Navigate to the specified URL
             page.navigate("https://freetestdata.com/document-files/pdf/");
 
-            // Set up an event listener for the 'download' event defines the action to wait for and download the file.
-            Download downloadFile = page.waitForDownload(() -> {
+            // Initiate a download and wait for it to complete
+            Download download = page.waitForDownload( () -> {
 
-                // Click the link containing the specific PDF we want to download.
+                // Trigger the download by clicking the link to the PDF
                 page.click("//a[contains(@href,'Free_Test_Data_10.5MB_PDF.pdf')]");
             });
 
-            // Check if the download failed by looking for a non-null failure object.
-            boolean flag = downloadFile.failure() != null;
+            // Specify the destination path to save the downloaded file with the suggested file name
+            Path filePath = Paths.get("C:\\Users\\Jagatheshwaran N\\Downloads", download.suggestedFilename());
 
-            if (flag) {
-                // Download interrupted, print an error message and the failure details.
-                System.out.println("File download got interrupted");
-                System.out.println(downloadFile.failure());
-            } else {
-                // Download successful, print a success message.
-                System.out.println("No interruption in file download");
-            }
+            // Save the downloaded file to the specified location
+            download.saveAs(filePath);
 
+            // Print a message indicating the successful save and the file path
+            System.out.println("Downloaded file saved at: " + filePath);
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();

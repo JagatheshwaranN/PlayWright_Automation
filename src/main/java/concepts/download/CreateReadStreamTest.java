@@ -5,6 +5,15 @@ import org.testng.annotations.Test;
 
 import java.io.*;
 
+/**
+ * The code demonstrates a scenario where a text file is generated on a web page, downloaded,
+ * and its contents are printed to the console.
+ * Establishes an event listener for download events using page.onDownload().When a file
+ * download is triggered, the script captures the download event and creates a read stream
+ * from the downloaded file using download.createReadStream().
+ *
+ * @author Jagatheshwaran N
+ */
 public class CreateReadStreamTest {
 
     @Test

@@ -3,18 +3,20 @@ package concepts.download;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
+import java.nio.file.Path;
+
 /**
- * This code is designed to test the download functionality of a web page, specifically
- * focusing on handling download failures.Checks if the download failed by examining
- * the failure property of the Download object.Checks for download interruptions, and
- * provides appropriate feedback messages based on the outcome of the download.
+ * This code tests the download functionality of a web page, focusing on downloading a
+ * PDF file. It uses Playwright to automate the browser interactions, retrieves the file
+ * path where the downloaded file is saved, and prints this file path to the console.
+ * The script includes proper exception handling and resource cleanup.
  *
  * @author Jagatheshwaran N
  */
-public class FailureTest {
+public class PathTest {
 
     @Test
-    public void testDownloadFailure() {
+    public void testDownloadPath() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -43,25 +45,18 @@ public class FailureTest {
             // Navigate to the specified URL
             page.navigate("https://freetestdata.com/document-files/pdf/");
 
-            // Set up an event listener for the 'download' event defines the action to wait for and download the file.
-            Download downloadFile = page.waitForDownload(() -> {
+            // Initiate a download and wait for it to complete
+            Download download = page.waitForDownload( () -> {
 
-                // Click the link containing the specific PDF we want to download.
+                // Trigger the download by clicking the link to the PDF
                 page.click("//a[contains(@href,'Free_Test_Data_10.5MB_PDF.pdf')]");
             });
 
-            // Check if the download failed by looking for a non-null failure object.
-            boolean flag = downloadFile.failure() != null;
+            // Get the file path where the downloaded file is saved
+            Path filePath = download.path();
 
-            if (flag) {
-                // Download interrupted, print an error message and the failure details.
-                System.out.println("File download got interrupted");
-                System.out.println(downloadFile.failure());
-            } else {
-                // Download successful, print a success message.
-                System.out.println("No interruption in file download");
-            }
-
+            // Print the file path
+            System.out.println("Path of the downloaded file: " + filePath);
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();

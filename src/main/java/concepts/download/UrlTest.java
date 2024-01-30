@@ -4,17 +4,17 @@ import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
 /**
- * This code is designed to test the download functionality of a web page, specifically
- * focusing on handling download failures.Checks if the download failed by examining
- * the failure property of the Download object.Checks for download interruptions, and
- * provides appropriate feedback messages based on the outcome of the download.
+ *  This code tests the download functionality of a web page, specifically a PDF file.
+ *  It uses Playwright to automate the browser interactions, retrieves the URL of the
+ *  downloaded file, and prints this URL to the console. The script includes proper
+ *  exception handling and resource cleanup.
  *
  * @author Jagatheshwaran N
  */
-public class FailureTest {
+public class UrlTest {
 
     @Test
-    public void testDownloadFailure() {
+    public void testDownloadUrl() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -43,25 +43,18 @@ public class FailureTest {
             // Navigate to the specified URL
             page.navigate("https://freetestdata.com/document-files/pdf/");
 
-            // Set up an event listener for the 'download' event defines the action to wait for and download the file.
-            Download downloadFile = page.waitForDownload(() -> {
+            // Initiate a download and wait for it to complete
+            Download download = page.waitForDownload( () -> {
 
-                // Click the link containing the specific PDF we want to download.
+                // Trigger the download by clicking the link to the PDF
                 page.click("//a[contains(@href,'Free_Test_Data_10.5MB_PDF.pdf')]");
             });
 
-            // Check if the download failed by looking for a non-null failure object.
-            boolean flag = downloadFile.failure() != null;
+            // Get the URL of the downloaded file using the download.url() method
+            String downloadFileUrl = download.url();
 
-            if (flag) {
-                // Download interrupted, print an error message and the failure details.
-                System.out.println("File download got interrupted");
-                System.out.println(downloadFile.failure());
-            } else {
-                // Download successful, print a success message.
-                System.out.println("No interruption in file download");
-            }
-
+            // Print the download URL to the console
+            System.out.println("Download URL of the downloaded file: " + downloadFileUrl);
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();
