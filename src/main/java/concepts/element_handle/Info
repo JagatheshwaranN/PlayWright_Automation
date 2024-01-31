@@ -1,0 +1,2 @@
+As per the disclaimer given by playwright team. Use of ElementHandle is discouraged. And, we should use
+Locator instead of ElementHandle.
