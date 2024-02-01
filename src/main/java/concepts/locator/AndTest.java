@@ -35,7 +35,7 @@ public class AndTest {
             // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Navigate to the demo page for file download automation
+            // Navigate to the demo page
             page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
             // Get a Locator for elements with the Aria role BUTTON and also having the title "submit"

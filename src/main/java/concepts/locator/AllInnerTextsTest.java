@@ -35,7 +35,7 @@ public class AllInnerTextsTest {
             // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Navigate to the demo page for file download automation
+            // Navigate to the demo page
             page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
             // Get a list of text content from all elements with the Aria role LINK on the page

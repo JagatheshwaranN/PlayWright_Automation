@@ -4,10 +4,10 @@ import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import org.testng.annotations.Test;
 
-public class AllTest {
+public class CheckTest {
 
     @Test
-    public void testLocatorAll() {
+    public void testLocatorCheck() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -33,15 +33,14 @@ public class AllTest {
             // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Navigate to the demo page
+            // Navigate to a local HTML file
             page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
-            // Iterate through all the List Item elements found by the specified Aria role
-            for (Locator listElement : page.getByRole(AriaRole.LISTITEM).all()) {
-
-                // Print the text content of each List Item
-                System.out.println(listElement.textContent());
-            }
+            // Locate the checkbox by ARIA role and check it with additional options
+            // Here; we use setForce(false) to indicate that Playwright should not forcibly
+            // check the checkbox, allowing the browser to follow its natural behavior (e.g.,
+            // if the checkbox is disabled, it won't be checked).
+            page.getByRole(AriaRole.CHECKBOX).check(new Locator.CheckOptions().setForce(false));
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();

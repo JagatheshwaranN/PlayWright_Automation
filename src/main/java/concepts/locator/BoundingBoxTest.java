@@ -1,13 +1,13 @@
 package concepts.locator;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.BoundingBox;
 import org.testng.annotations.Test;
 
-public class AllTest {
+public class BoundingBoxTest {
 
     @Test
-    public void testLocatorAll() {
+    public void testLocatorBoundingBox() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -33,15 +33,17 @@ public class AllTest {
             // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Navigate to the demo page
+            // Navigate to a local HTML file
             page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
-            // Iterate through all the List Item elements found by the specified Aria role
-            for (Locator listElement : page.getByRole(AriaRole.LISTITEM).all()) {
+            BoundingBox button = page.locator("#submit").boundingBox();
 
-                // Print the text content of each List Item
-                System.out.println(listElement.textContent());
-            }
+            page.mouse().click(button.x + button.width / 2, button.y + button.height / 2);
+
+            Locator buttonElement = page.locator("#submit");
+
+            System.out.println(buttonElement.textContent());
+
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();

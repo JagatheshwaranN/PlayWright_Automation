@@ -35,6 +35,19 @@
     <button id="submit" value="submit" type="submit" title="submit">Playwright Submit</button>
 </div>
 <hr />
+<form id="genderForm">
+    <label>
+        <input type="checkbox" id="terms" value="terms">
+        Terms & Conditions
+    </label>
+</form>
+<hr />
 </body>
 </html>
 
+<script>
+    buttonElement = document.getElementById("submit")
+    buttonElement.onclick = () => {
+        buttonElement.textContent = "BoundingBox";
+    }
+</script>

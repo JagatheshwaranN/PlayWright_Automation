@@ -1,0 +1,71 @@
+Here's a breakdown of the differences between allInnerTexts() and allTextContents()
+methods in Playwright Java API:
+==============================================================================================================
+Key Difference:
+===============
+allInnerTexts() returns the visible text content of elements, as it would be displayed
+to a user on the page.
+
+allTextContents() returns all text content of elements, including those that are not
+visible (e.g., hidden elements or text within script tags).
+
+Specific Behavior:
+==================
+allInnerTexts()
+===============
+excludes the below,
+Text within hidden elements.
+Text within script and style tags.
+Comments.
+Whitespace outside the root element.
+
+allTextContents()
+=================
+Includes all of the above.
+
+Example:
+========
+HTML
+<div>
+  This text is visible.
+  <span style="display: none;">This text is hidden.</span>
+</div>
+<script>
+  // This text is inside a script tag.
+</script>
+
+allInnerTexts() would return: ["This text is visible."]
+
+allTextContents() would return: ["This text is visible.", "This text is hidden.",
+"// This text is inside a script tag."]
+
+When to Use Each:
+=================
+Use allInnerTexts()
+===================
+When you want to work with the text that a user would actually see on the page.
+
+Use allTextContents()
+=====================
+When you need to capture all text content, even if it's not visually displayed.
+
+==============================================================================================================
+Here's a detailed explanation of boundingBox in Playwright Java API:
+
+What is boundingBox?
+====================
+1. It's a method available on the ElementHandle class in Playwright Java.
+
+2. It returns a BoundingBox object, which represents the rectangular coordinates of
+   an element relative to the main frame viewport (usually the browser window).
+
+3. It essentially tells you the element's position and size on the visible screen.
+
+Key Properties of a BoundingBox:
+================================
+x: The horizontal coordinate of the top-left corner of the element.
+y: The vertical coordinate of the top-left corner of the element.
+width: The width of the element in pixels.
+height: The height of the element in pixels.
+
+==============================================================================================================
