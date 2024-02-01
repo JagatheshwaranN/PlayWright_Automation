@@ -1,13 +1,13 @@
 package concepts.locator;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.BoundingBox;
+import com.microsoft.playwright.options.AriaRole;
 import org.testng.annotations.Test;
 
-public class BoundingBoxTest {
+public class ClickTest {
 
     @Test
-    public void testLocatorBoundingBox() {
+    public void testLocatorClick() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -36,12 +36,8 @@ public class BoundingBoxTest {
             // Navigate to a local HTML file
             page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
-            // Get the bounding box of the button with id "submit"
-            BoundingBox buttonBoundingBox = page.locator("#submit").boundingBox();
-
-            // Click the center of the button using mouse actions based on its bounding box
-            page.mouse().click(buttonBoundingBox.x + buttonBoundingBox.width / 2,
-                    buttonBoundingBox.y + buttonBoundingBox.height / 2);
+            // Locate the button by ARIA role and click it
+            page.getByRole(AriaRole.BUTTON).click();
 
             // Locate the button element again (not necessary, but included for demonstration)
             Locator buttonElement = page.locator("#submit");

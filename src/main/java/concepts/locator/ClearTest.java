@@ -1,13 +1,13 @@
 package concepts.locator;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.BoundingBox;
+import com.microsoft.playwright.options.AriaRole;
 import org.testng.annotations.Test;
 
-public class BoundingBoxTest {
+public class ClearTest {
 
     @Test
-    public void testLocatorBoundingBox() {
+    public void testLocatorClear() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -33,21 +33,17 @@ public class BoundingBoxTest {
             // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Navigate to a local HTML file
+            // Navigate to the demo page
             page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
-            // Get the bounding box of the button with id "submit"
-            BoundingBox buttonBoundingBox = page.locator("#submit").boundingBox();
+            // Locate an input element using the test ID "username"
+            Locator input = page.getByTestId("username");
 
-            // Click the center of the button using mouse actions based on its bounding box
-            page.mouse().click(buttonBoundingBox.x + buttonBoundingBox.width / 2,
-                    buttonBoundingBox.y + buttonBoundingBox.height / 2);
+            // Fill the located input field with the text "Playwright"
+            input.fill("Playwright");
 
-            // Locate the button element again (not necessary, but included for demonstration)
-            Locator buttonElement = page.locator("#submit");
-
-            // Print the text content of the button element
-            System.out.println(buttonElement.textContent());
+            // Locate the textbox by ARIA role and clear its content
+            page.getByRole(AriaRole.TEXTBOX).clear();
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();

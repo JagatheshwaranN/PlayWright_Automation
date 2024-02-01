@@ -1,13 +1,12 @@
 package concepts.locator;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.BoundingBox;
 import org.testng.annotations.Test;
 
-public class BoundingBoxTest {
+public class DBLClickTest {
 
     @Test
-    public void testLocatorBoundingBox() {
+    public void testLocatorDBLClick() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -36,15 +35,11 @@ public class BoundingBoxTest {
             // Navigate to a local HTML file
             page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
-            // Get the bounding box of the button with id "submit"
-            BoundingBox buttonBoundingBox = page.locator("#submit").boundingBox();
-
-            // Click the center of the button using mouse actions based on its bounding box
-            page.mouse().click(buttonBoundingBox.x + buttonBoundingBox.width / 2,
-                    buttonBoundingBox.y + buttonBoundingBox.height / 2);
-
-            // Locate the button element again (not necessary, but included for demonstration)
+            // Locate the button with id "submit"
             Locator buttonElement = page.locator("#submit");
+
+            // Perform a double click action on the button
+            buttonElement.dblclick();
 
             // Print the text content of the button element
             System.out.println(buttonElement.textContent());
