@@ -1,13 +1,12 @@
 package concepts.locator;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.AriaRole;
 import org.testng.annotations.Test;
 
-public class EvaluateAllTest {
+public class FilterTest {
 
     @Test
-    public void testLocatorEvaluateAll() {
+    public void testLocatorFilter() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -33,18 +32,16 @@ public class EvaluateAllTest {
             // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Navigate to the local HTML file using the file:/// protocol
+            // Navigate to the demo page
             page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
-            // Locate all elements with role "listitem" on the page
-            Locator list = page.getByRole(AriaRole.LISTITEM);
+            // Select all 'li' elements within the 'unorderedList' element
+            Locator filterLocator = page.locator("#unorderedList li")
+                    // Apply a filter to select only those elements with text content 'Coffee'
+                    .filter(new Locator.FilterOptions().setHasText("Coffee"));
 
-            // Evaluate a JavaScript function on all matching elements to check if the total number of list items is equal to 6
-            // The evaluateAll method returns a boolean indicating whether the condition is met or not
-            boolean totalListItems = (boolean) list.evaluateAll("(li, expected) => li.length == expected", 6);
-
-            // Print the result to the console
-            System.out.println(totalListItems);
+            // Print the text content of the filtered elements
+            System.out.println(filterLocator.textContent());
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();
