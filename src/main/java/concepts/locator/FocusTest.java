@@ -1,28 +1,12 @@
 package concepts.locator;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.AriaRole;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
-/**
- * The code sets up Playwright, launches a Chromium browser, navigates to a local
- * HTML file, extracts and prints text content from elements with a specific role,
- * and then cleans up by closing the browser and Playwright.The script is structured
- * with exception handling to manage errors during execution.
- * <p>
- * In Playwright, the locator.allInnerTexts() method is used to retrieve the inner
- * text content of all the elements that match a given locator.
- * Additionally, it returns a list of strings, where each string corresponds to the
- * inner text of an individual element found on the page.
- *
- * @author Jagatheshwaran N
- */
-public class AllInnerTextsTest {
+public class FocusTest {
 
     @Test
-    public void testLocatorAllInnerTexts() {
+    public void testLocatorFocus() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -48,14 +32,14 @@ public class AllInnerTextsTest {
             // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Navigate to the demo page
-            page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
+            // Navigate to the specified URL
+            page.navigate("https://letcode.in/edit");
 
-            // Get a list of text content from all elements with the Aria role LINK on the page
-            List<String> linkTextList = page.getByRole(AriaRole.LINK).allInnerTexts();
+            // Focus on the element with id "join" with a timeout of 3000 milliseconds
+            page.locator("#join").focus(new Locator.FocusOptions().setTimeout(3000));
 
-            // Iterate through the list of link text and print each one using a lambda expression
-            linkTextList.forEach(System.out::println);
+            // Fill in the value "I'm fine" in the input field with id "join"
+            page.locator("#join").fill("I'm fine");
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();

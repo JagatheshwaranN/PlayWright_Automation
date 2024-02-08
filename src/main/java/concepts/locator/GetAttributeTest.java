@@ -1,28 +1,12 @@
 package concepts.locator;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.AriaRole;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
-/**
- * The code sets up Playwright, launches a Chromium browser, navigates to a local
- * HTML file, extracts and prints text content from elements with a specific role,
- * and then cleans up by closing the browser and Playwright.The script is structured
- * with exception handling to manage errors during execution.
- * <p>
- * In Playwright, the locator.allInnerTexts() method is used to retrieve the inner
- * text content of all the elements that match a given locator.
- * Additionally, it returns a list of strings, where each string corresponds to the
- * inner text of an individual element found on the page.
- *
- * @author Jagatheshwaran N
- */
-public class AllInnerTextsTest {
+public class GetAttributeTest {
 
     @Test
-    public void testLocatorAllInnerTexts() {
+    public void testGetAttribute() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -48,14 +32,20 @@ public class AllInnerTextsTest {
             // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Navigate to the demo page
+            // Navigate to the specified URL
             page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
-            // Get a list of text content from all elements with the Aria role LINK on the page
-            List<String> linkTextList = page.getByRole(AriaRole.LINK).allInnerTexts();
+            // Retrieve the value of the "data-testid" attribute for the element with ID "username"
+            String attributeValue1 = page.locator("#username").getAttribute("data-testid");
 
-            // Iterate through the list of link text and print each one using a lambda expression
-            linkTextList.forEach(System.out::println);
+            // Retrieve the value of the "title" attribute for the element with ID "username"
+            String attributeValue2 = page.locator("#username").getAttribute("title");
+
+            // Print the value of the "data-testid" attribute
+            System.out.println(attributeValue1);
+
+            // Print the value of the "title" attribute
+            System.out.println(attributeValue2);
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();
