@@ -3,10 +3,10 @@ package concepts.locator;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
-public class FillTest {
+public class GetByPlaceHolderTest {
 
     @Test
-    public void testLocatorFill() {
+    public void testLocatorGetByPlaceHolder() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -35,11 +35,11 @@ public class FillTest {
             // Navigate to the demo page
             page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
-            // Locate an input element with role "textbox" on the page
-            Locator input = page.locator("#username");
+            // Locate the input field by its placeholder with the text "password"
+            Locator password = page.getByPlaceholder("password");
 
-            // Fill the located input field with the text "Playwright"
-            input.fill("Playwright");
+            // Fill the input field with the value "Secret"
+            password.fill("Secret");
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();
