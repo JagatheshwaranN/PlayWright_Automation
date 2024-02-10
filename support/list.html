@@ -2,6 +2,10 @@
 <html lang="en">
 <title>List Demo</title>
 <body>
+<div id="text-container">
+    <div>Playwright <span>Examples</span></div>
+    <div>Playwright <span>Automation</span></div>
+</div>
 <div id="list-container">
     <h1>An Unordered HTML List</h1>
     <ul id="unorderedList">
@@ -18,7 +22,7 @@
 </div>
 <hr/>
 <div id="links">
-    <a href="https://www.google.com/" id="google">GoogleLink</a>
+    <a href="https://www.google.com/" id="google" title="google">GoogleLink</a>
     <br/>
     <a href="https://playwright.dev/" id="playwright">PlaywrightLink</a>
 </div>
@@ -60,5 +64,6 @@
     buttonElement.ondblclick = () => {
         buttonElement.textContent = "Button Double Clicked";
     }
+
 
 </script>
