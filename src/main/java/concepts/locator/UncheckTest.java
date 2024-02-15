@@ -4,10 +4,10 @@ import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import org.testng.annotations.Test;
 
-public class IsCheckedTest {
+public class UncheckTest {
 
     @Test
-    public void testLocatorIsChecked() {
+    public void testLocatorUncheck() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -33,26 +33,29 @@ public class IsCheckedTest {
             // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Navigate to the demo page
+            // Navigate to a local HTML file
             page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
-            // Locate a checkbox element by its ARIA role
-            Locator termsCheckBox;
+            // Locate the checkbox on the page using its ARIA role
+            Locator checkbox = page.getByRole(AriaRole.CHECKBOX);
 
-            // Locate a checkbox element using the AriaRole.CHECKBOX role
-            termsCheckBox = page.getByRole(AriaRole.CHECKBOX);
+            // Check the checkbox with the option to force the action (setForce(false) means not forcing)
+            checkbox.check(new Locator.CheckOptions().setForce(false));
 
-            // Check the located checkbox (simulating a user checking the checkbox)
-            termsCheckBox.check();
+            // Check if the checkbox is checked after the check operation
+            boolean isChecked = checkbox.isChecked();
 
-            // Re-locate the checkbox element after it has been checked
-            termsCheckBox = page.getByRole(AriaRole.CHECKBOX);
+            // Print the result of checking the checkbox
+            System.out.println("After Check, Is checkbox checked? : " + isChecked);
 
-            // Check if the checkbox is currently checked
-            boolean isChecked = termsCheckBox.isChecked();
+            // Uncheck the checkbox with the option to force the action (setForce(true) means forcing)
+            checkbox.uncheck(new Locator.UncheckOptions().setForce(true));
 
-            // Print the result to the console
-            System.out.println("Is checkbox checked? : " + isChecked);
+            // Check if the checkbox is checked after the uncheck operation
+            isChecked = checkbox.isChecked();
+
+            // Print the result of unchecking the checkbox
+            System.out.println("After Uncheck, Is checkbox checked? : " + isChecked);
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();

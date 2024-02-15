@@ -1,13 +1,12 @@
 package concepts.locator;
 
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.AriaRole;
 import org.testng.annotations.Test;
 
-public class IsCheckedTest {
+public class SelectTextTest {
 
     @Test
-    public void testLocatorIsChecked() {
+    public void testLocatorSelectText() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -36,23 +35,20 @@ public class IsCheckedTest {
             // Navigate to the demo page
             page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
-            // Locate a checkbox element by its ARIA role
-            Locator termsCheckBox;
+            // Locate an input element with role "textbox" on the page
+            Locator input = page.locator("#username");
 
-            // Locate a checkbox element using the AriaRole.CHECKBOX role
-            termsCheckBox = page.getByRole(AriaRole.CHECKBOX);
+            // Fill the located input field with the text "Playwright"
+            input.fill("Playwright");
 
-            // Check the located checkbox (simulating a user checking the checkbox)
-            termsCheckBox.check();
-
-            // Re-locate the checkbox element after it has been checked
-            termsCheckBox = page.getByRole(AriaRole.CHECKBOX);
-
-            // Check if the checkbox is currently checked
-            boolean isChecked = termsCheckBox.isChecked();
-
-            // Print the result to the console
-            System.out.println("Is checkbox checked? : " + isChecked);
+            // Select all text within the "input" element, respecting its current state
+            input.selectText(
+                    // Create a new SelectTextOptions object to configure the selection behavior
+                    new Locator.SelectTextOptions()
+                            // Set the force option to false, indicating that the selection
+                            // should only proceed if the element is fully scrollable and
+                            // appears to be intractable
+                            .setForce(false));
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();
