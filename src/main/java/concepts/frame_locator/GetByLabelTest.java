@@ -3,6 +3,15 @@ package concepts.frame_locator;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
+/**
+ * The code tests Playwright's ability to interact with iframes and locate an input
+ * element within the iframe by its associated label text.
+ * It then fills the located input element with the text "Brownie".
+ * The browser is launched in non-headless mode for visual inspection, and proper
+ * resource cleanup is implemented in the finally block.
+ *
+ * @author Jagatheshwaran N
+ */
 public class GetByLabelTest {
 
     @Test
@@ -28,7 +37,7 @@ public class GetByLabelTest {
             browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(false));
 
             // Create a browser context with touch support
-            BrowserContext browserContext = browser.newContext(new Browser.NewContextOptions().setHasTouch(true));
+            BrowserContext browserContext = browser.newContext();
 
             // Create a new page within the context
             Page page = browserContext.newPage();

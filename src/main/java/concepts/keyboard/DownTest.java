@@ -3,7 +3,15 @@ package concepts.keyboard;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
-
+/**
+ * The code tests the Playwright library's capability to simulate keyboard interactions by
+ * focusing on an input field, pressing the 'a' key, and then pressing the 'b' key while
+ * 'a' is still held down.
+ * The browser is launched in non-headless mode for visual inspection, and proper resource
+ * cleanup is implemented in the finally block.
+ *
+ * @author Jagatheshwaran N
+ */
 public class DownTest {
 
     @Test

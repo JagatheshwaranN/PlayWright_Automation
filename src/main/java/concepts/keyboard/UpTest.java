@@ -3,6 +3,16 @@ package concepts.keyboard;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
+/**
+ * The code tests the Playwright library's capability to simulate both key presses and
+ * releases.It launches a Chromium browser, navigates to a page, focuses on an input
+ * field, simulates pressing the 'a' and 'b' keys simultaneously, and then releases the
+ * 'a' and 'b' keys.
+ * The browser is launched in non-headless mode for visual inspection, and proper resource
+ * cleanup is implemented in the finally block.
+ *
+ * @author Jagatheshwaran N
+ */
 public class UpTest {
 
     @Test

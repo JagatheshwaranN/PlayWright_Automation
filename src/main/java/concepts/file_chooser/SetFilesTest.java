@@ -9,6 +9,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
 
+/**
+ * The code tests Playwright's ability to interact with a file chooser element
+ * on a webpage and sets files using various methods.
+ * There might be an issue with the fileChooser.setFiles(filePayload) part, and
+ * you may need to investigate further or modify the payload creation to resolve
+ * the issue.
+ * The browser is launched in non-headless mode for visual inspection, and proper
+ * resource cleanup is implemented in the finally block.
+ *
+ * @author Jagatheshwaran N
+ */
 public class SetFilesTest {
 
     @Test

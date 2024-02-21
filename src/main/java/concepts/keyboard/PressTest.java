@@ -3,6 +3,16 @@ package concepts.keyboard;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
+/**
+ * The code tests the Playwright library's capability to simulate keyboard key presses.
+ * It launches a Chromium browser, navigates to a page, focuses on an input field, and
+ * simulates pressing the 'A' and 'B' keys simultaneously, followed by pressing the 'C'
+ * key.
+ * The browser is launched in non-headless mode for visual inspection, and proper
+ * resource cleanup is implemented in the finally block.
+ *
+ * @author Jagatheshwaran N
+ */
 public class PressTest {
 
     @Test

@@ -3,6 +3,15 @@ package concepts.frame_locator;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
+/**
+ * The code not only tests the general functionality of navigating frames and
+ * interacting with elements but specifically demonstrates the ability to navigate
+ * to the Nth position of a frame using Playwright's nth method.
+ * This feature is useful when dealing with multiple frames, allowing precise
+ * navigation to a particular frame among the available options.
+ *
+ * @author Jagatheshwaran N
+ */
 public class NthPositionTest {
 
     @Test
@@ -28,7 +37,7 @@ public class NthPositionTest {
             browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(false));
 
             // Create a browser context with touch support
-            BrowserContext browserContext = browser.newContext(new Browser.NewContextOptions().setHasTouch(true));
+            BrowserContext browserContext = browser.newContext();
 
             // Create a new page within the context
             Page page = browserContext.newPage();

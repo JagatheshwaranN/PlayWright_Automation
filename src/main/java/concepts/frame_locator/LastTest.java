@@ -4,6 +4,18 @@ import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import org.testng.annotations.Test;
 
+/**
+ * The code tests Playwright's ability to locate the last frame on a webpage
+ * by its name attribute and then find an element within that frame by its
+ * ARIA role as a heading.
+ * It launches a Chromium browser, navigates to a specific page with frames,
+ * locates the desired frame, finds the last frame using last(), locates an
+ * element within the last frame using getByRole, extracts the text content,
+ * prints it to the console, and performs proper resource cleanup in the
+ * finally block.
+ *
+ * @author Jagatheshwaran N
+ */
 public class LastTest {
 
     @Test
@@ -29,7 +41,7 @@ public class LastTest {
             browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(false));
 
             // Create a browser context with touch support
-            BrowserContext browserContext = browser.newContext(new Browser.NewContextOptions().setHasTouch(true));
+            BrowserContext browserContext = browser.newContext();
 
             // Create a new page within the context
             Page page = browserContext.newPage();

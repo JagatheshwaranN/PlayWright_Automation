@@ -4,6 +4,15 @@ import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import org.testng.annotations.Test;
 
+/**
+ * The code tests Playwright's ability to interact with frames and locate an element
+ * within a frame based on its ARIA role and additional attributes.
+ * It launches a Chromium browser, navigates to a specific page with frames, locates
+ * the desired frame, finds an element within the frame using getByRole, prints the
+ * extracted text content, and performs proper resource cleanup in the finally block.
+ *
+ * @author Jagatheshwaran N
+ */
 public class GetByRoleTest {
 
     @Test
@@ -29,7 +38,7 @@ public class GetByRoleTest {
             browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(false));
 
             // Create a browser context with touch support
-            BrowserContext browserContext = browser.newContext(new Browser.NewContextOptions().setHasTouch(true));
+            BrowserContext browserContext = browser.newContext();
 
             // Create a new page within the context
             Page page = browserContext.newPage();

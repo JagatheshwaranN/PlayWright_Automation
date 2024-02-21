@@ -3,6 +3,15 @@ package concepts.file_chooser;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
+/**
+ * The code tests Playwright's ability to interact with a file chooser element
+ * on a webpage, waits for the file chooser dialog to appear, and retrieves the
+ * title of the associated page.
+ * The browser is launched in non-headless mode for visual inspection, and proper
+ * resource cleanup is implemented in the finally block.
+ *
+ * @author Jagatheshwaran N
+ */
 public class PageTest {
 
     @Test

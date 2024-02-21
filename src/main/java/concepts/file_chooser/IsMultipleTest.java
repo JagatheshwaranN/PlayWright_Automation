@@ -3,6 +3,17 @@ package concepts.file_chooser;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
+/**
+ * The code tests Playwright's ability to interact with a file chooser element
+ * on a webpage and checks if it has the capability to upload multiple files.
+ * It launches a Chromium browser with touch support, navigates to a specific page
+ * with a file upload demo, triggers a file chooser dialog, and checks if it supports
+ * multiple file uploads.
+ * The browser is launched in non-headless mode for visual inspection, and proper
+ * resource cleanup is implemented in the finally block.
+ *
+ * @author Jagatheshwaran N
+ */
 public class IsMultipleTest {
 
     @Test

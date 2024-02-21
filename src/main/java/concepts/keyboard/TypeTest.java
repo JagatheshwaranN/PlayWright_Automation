@@ -3,6 +3,17 @@ package concepts.keyboard;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
+/**
+ * The code tests the Playwright library's capability to simulate typing text with a
+ * specified delay between key presses.
+ * It launches a Chromium browser, navigates to a page, focuses on an input field,
+ * and types "Hello" into the input field with a delay of 200 milliseconds between
+ * key presses.
+ * The browser is launched in non-headless mode for visual inspection, and proper
+ * resource cleanup is implemented in the finally block.
+ *
+ * @author Jagatheshwaran N
+ */
 public class TypeTest {
 
     @Test

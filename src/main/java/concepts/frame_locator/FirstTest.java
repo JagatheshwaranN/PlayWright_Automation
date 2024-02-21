@@ -4,6 +4,16 @@ import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import org.testng.annotations.Test;
 
+/**
+ * The code tests Playwright's ability to interact with iframes, and it launches a Chromium
+ * browser, navigates to a page with an iframe, locates the iframe using an XPath expression,
+ * selects the first frame, and finds an element within the iframe with a specified ARIA role.
+ * The text content of the located heading element is then printed to the console.
+ * The browser is launched in non-headless mode for visual inspection, and proper resource
+ * cleanup is implemented in the finally block.
+ *
+ * @author Jagatheshwaran N
+ */
 public class FirstTest {
 
     @Test
@@ -29,7 +39,7 @@ public class FirstTest {
             browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(false));
 
             // Create a browser context with touch support
-            BrowserContext browserContext = browser.newContext(new Browser.NewContextOptions().setHasTouch(true));
+            BrowserContext browserContext = browser.newContext();
 
             // Create a new page within the context
             Page page = browserContext.newPage();

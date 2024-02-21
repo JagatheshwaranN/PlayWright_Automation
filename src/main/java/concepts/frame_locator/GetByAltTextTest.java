@@ -3,6 +3,17 @@ package concepts.frame_locator;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
+/**
+ * The code tests Playwright's ability to interact with iframes and locate an image
+ * within the iframe by its alt attribute value.
+ * It launches a Chromium browser, navigates to a specific page with an iframe, locates
+ * the iframe, finds an image within the iframe with the alt attribute value "TeddyBears",
+ * checks its visibility, and prints the result to the console.
+ * The browser is launched in non-headless mode for visual inspection, and proper resource
+ * cleanup is implemented in the finally block.
+ *
+ * @author Jagatheshwaran N
+ */
 public class GetByAltTextTest {
 
     @Test
@@ -28,7 +39,7 @@ public class GetByAltTextTest {
             browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(false));
 
             // Create a browser context with touch support
-            BrowserContext browserContext = browser.newContext(new Browser.NewContextOptions().setHasTouch(true));
+            BrowserContext browserContext = browser.newContext();
 
             // Create a new page within the context
             Page page = browserContext.newPage();
