@@ -1,12 +1,14 @@
-package concepts.js_handle;
+package concepts.mouse;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.BoundingBox;
+import com.microsoft.playwright.options.MouseButton;
 import org.testng.annotations.Test;
 
-public class AsElementTest {
+public class DblClickTest {
 
     @Test
-    public void testJSHandleAsElement() {
+    public void testMouseDblClick() {
 
         // Initialize playwright variable to null
         Playwright playwright = null;
@@ -33,26 +35,21 @@ public class AsElementTest {
             // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Navigate to the local HTML file
+            // Navigate to a local HTML file using the file protocol
             page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
-            // Find the first <h1> element on the page
-            JSHandle jsHandle = page.evaluateHandle("() => document.querySelector('h1')");
+            // Locate the playwright button element on the page using an ID selector
+            Locator playwrightButton = page.locator("#submit");
 
-            // Check if the JSHandle is valid (optional, but recommended)
-            if (jsHandle != null) {
-                // Convert the JSHandle to an ElementHandle for element-specific actions
-                ElementHandle elementHandle = jsHandle.asElement();
+            // Get the bounding box (position and size) of the playwright button element
+            BoundingBox pwBtnBoundingBox = playwrightButton.boundingBox();
 
-                // Ensure the ElementHandle is valid
-                if (elementHandle != null) {
-                    // Extract the text content of the <h1> element
-                    String text = elementHandle.textContent();
-
-                    // Print the extracted text
-                    System.out.println("Text content of the <h1> element: " + text);
-                }
-            }
+            // Simulate a mouse double click at the center of the playwright button element
+            page.mouse().dblclick(
+                    pwBtnBoundingBox.x + pwBtnBoundingBox.width / 2,
+                    pwBtnBoundingBox.y + pwBtnBoundingBox.height / 2,
+                    new Mouse.DblclickOptions().setButton(MouseButton.LEFT)
+            );
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();
@@ -68,4 +65,5 @@ public class AsElementTest {
             }
         }
     }
+
 }

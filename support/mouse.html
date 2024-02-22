@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<h1>HTML DOM Events</h1>
+
+<p>Clock the text below!</p>
+<p id="mouse" onmousedown="mouseDown()" onmouseup="mouseUp()">
+    The mouseDown() function sets the color of this text to red.
+    The mouseUp() function sets the color of this text to blue.
+</p>
+
+<script>
+function mouseDown() {
+  document.getElementById("mouse").style.color = "red";
+}
+
+function mouseUp() {
+  document.getElementById("mouse").style.color = "blue";
+}
+</script>
+
+</body>
+</html>

@@ -1,12 +1,14 @@
-package concepts.js_handle;
+package concepts.mouse;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.BoundingBox;
+import com.microsoft.playwright.options.MouseButton;
 import org.testng.annotations.Test;
 
-public class AsElementTest {
+public class UpTest {
 
     @Test
-    public void testJSHandleAsElement() {
+    public void testMouseUp() {
 
         // Initialize playwright variable to null
         Playwright playwright = null;
@@ -33,26 +35,23 @@ public class AsElementTest {
             // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Navigate to the local HTML file
-            page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
+            // Navigate to a local HTML file using the file protocol
+            page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/mouse.html");
 
-            // Find the first <h1> element on the page
-            JSHandle jsHandle = page.evaluateHandle("() => document.querySelector('h1')");
+            // Locate the element with the ID "mouse" on the page and get its bounding box
+            BoundingBox paraElement = page.locator("#mouse").boundingBox();
 
-            // Check if the JSHandle is valid (optional, but recommended)
-            if (jsHandle != null) {
-                // Convert the JSHandle to an ElementHandle for element-specific actions
-                ElementHandle elementHandle = jsHandle.asElement();
+            // Move the mouse to the center of the bounding box of the "mouse" element
+            page.mouse().move(
+                    paraElement.x + paraElement.width / 2,
+                    paraElement.y + paraElement.height / 2
+            );
 
-                // Ensure the ElementHandle is valid
-                if (elementHandle != null) {
-                    // Extract the text content of the <h1> element
-                    String text = elementHandle.textContent();
+            // Simulate a mouse button press (left mouse button) at the center of the "mouse" element
+            page.mouse().down(new Mouse.DownOptions().setButton(MouseButton.LEFT));
 
-                    // Print the extracted text
-                    System.out.println("Text content of the <h1> element: " + text);
-                }
-            }
+            // Simulate a mouse button release (left mouse button) at the center of the "mouse" element
+            page.mouse().up(new Mouse.UpOptions().setButton(MouseButton.LEFT));
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();
@@ -68,4 +67,5 @@ public class AsElementTest {
             }
         }
     }
+
 }

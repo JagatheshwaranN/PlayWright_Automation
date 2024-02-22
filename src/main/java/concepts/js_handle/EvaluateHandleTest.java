@@ -39,7 +39,7 @@ public class EvaluateHandleTest {
             // Locate an element on the page with ID "playwright"
             JSHandle jsHandle = page.evaluateHandle("() => document.getElementById('playwright')");
 
-            // Check if the element exists
+            // Check if the JSHandle exists
             if (jsHandle != null) {
                 // Extract the text content of the element
                 JSHandle textHandle = jsHandle.evaluateHandle("ele => ele.textContent");

@@ -1,12 +1,13 @@
-package concepts.js_handle;
+package concepts.mouse;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.BoundingBox;
 import org.testng.annotations.Test;
 
-public class AsElementTest {
+public class ClickTest {
 
     @Test
-    public void testJSHandleAsElement() {
+    public void testMouseClick() {
 
         // Initialize playwright variable to null
         Playwright playwright = null;
@@ -33,26 +34,20 @@ public class AsElementTest {
             // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Navigate to the local HTML file
+            // Navigate to a local HTML file using the file protocol
             page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
-            // Find the first <h1> element on the page
-            JSHandle jsHandle = page.evaluateHandle("() => document.querySelector('h1')");
+            // Locate the password input element on the page using an XPath selector
+            Locator password = page.locator("//input[@title='pass']");
 
-            // Check if the JSHandle is valid (optional, but recommended)
-            if (jsHandle != null) {
-                // Convert the JSHandle to an ElementHandle for element-specific actions
-                ElementHandle elementHandle = jsHandle.asElement();
+            // Get the bounding box (position and size) of the password input element
+            BoundingBox passwordBoundingBox = password.boundingBox();
 
-                // Ensure the ElementHandle is valid
-                if (elementHandle != null) {
-                    // Extract the text content of the <h1> element
-                    String text = elementHandle.textContent();
-
-                    // Print the extracted text
-                    System.out.println("Text content of the <h1> element: " + text);
-                }
-            }
+            // Simulate a mouse click at the center of the password input element
+            page.mouse().click(
+                    passwordBoundingBox.x + passwordBoundingBox.width / 2,
+                    passwordBoundingBox.y + passwordBoundingBox.height / 2
+            );
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();
@@ -68,4 +63,5 @@ public class AsElementTest {
             }
         }
     }
+
 }

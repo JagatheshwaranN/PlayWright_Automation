@@ -39,7 +39,7 @@ public class DisposeTest {
             // Find an element with ID "google" using JavaScript evaluation
             JSHandle jsHandle = page.evaluateHandle("() => document.getElementById('google')");
 
-            // Check if the element exists (optional, but recommended)
+            // Check if the JSHandle exists (optional, but recommended)
             if (jsHandle != null) {
                 // Extract the text content of the element using another JavaScript evaluation
                 Object elementText = jsHandle.evaluate("element => element.innerText");
@@ -47,6 +47,7 @@ public class DisposeTest {
                 // Print the extracted text
                 System.out.println("Text content of the element: " + elementText);
             }
+
             // Release the reference to the JavaScript object for garbage collection
             assert jsHandle != null;
             jsHandle.dispose();
