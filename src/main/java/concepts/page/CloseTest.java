@@ -33,7 +33,7 @@ public class CloseTest {
             // Create a new page in the browser context
             Page page = browserContext.newPage();
 
-            // Navigate the first page to the specified URL
+            // Navigate to the specified file URL using Playwright
             page.navigate("https://playwright.dev/");
 
             // Close the page with specific options

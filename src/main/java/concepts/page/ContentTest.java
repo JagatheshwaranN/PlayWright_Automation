@@ -3,10 +3,10 @@ package concepts.page;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
-public class AddInitScriptTest {
+public class ContentTest {
 
     @Test
-    public void testPageAddInitScript() {
+    public void testPageContent() {
 
         // Initialize playwright variable to null
         Playwright playwright = null;
@@ -30,25 +30,17 @@ public class AddInitScriptTest {
             // Create a browser context with touch support
             BrowserContext browserContext = browser.newContext();
 
-            // Creating a new page within the browser context
+            // Create a new page in the browser context
             Page page = browserContext.newPage();
 
-            // Adding an initialization script to the page
-            // This script will display an alert with the message 'Welcome to Example Site!' when the page loads
-            page.addInitScript("window.alert('Welcome to Example Site!')");
+            // Navigate to the specified file URL using Playwright
+            page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
-            // Pausing the execution for 2000 milliseconds (2 seconds).
-            // This is often used to provide time for the alert to be displayed before further actions
-            Thread.sleep(2000);
+            // Retrieve the content of the current page
+            String pageContent = page.content();
 
-            // Navigate the page to the specified URL.
-            page.navigate("http://www.example.com/");
-
-            // Get the title of the current page.
-            String title = page.title();
-
-            // Print the title to the console.
-            System.out.println(title);
+            // Print the page content to the console
+            System.out.println(pageContent);
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();

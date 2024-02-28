@@ -3,11 +3,10 @@ package concepts.page;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
-public class AddInitScriptTest {
+public class DragAndDropTest {
 
     @Test
-    public void testPageAddInitScript() {
-
+    public void testPageDragAndDrop() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -27,28 +26,25 @@ public class AddInitScriptTest {
             // Launch the browser
             browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(false));
 
-            // Create a browser context with touch support
+            // Create a new isolated browser context
             BrowserContext browserContext = browser.newContext();
 
-            // Creating a new page within the browser context
+            // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Adding an initialization script to the page
-            // This script will display an alert with the message 'Welcome to Example Site!' when the page loads
-            page.addInitScript("window.alert('Welcome to Example Site!')");
+            // Navigate to the specified URL
+            page.navigate("https://letcode.in/dropable");
 
-            // Pausing the execution for 2000 milliseconds (2 seconds).
-            // This is often used to provide time for the alert to be displayed before further actions
-            Thread.sleep(2000);
+            // Perform a drag-and-drop operation from the element with id "draggable" to the element with id "droppable"
+            page.dragAndDrop("#draggable", "#droppable");
 
-            // Navigate the page to the specified URL.
-            page.navigate("http://www.example.com/");
+            // Locate the message element after the drag-and-drop operation
+            Locator dragMessage = page.locator("//div[@id='droppable']//p");
 
-            // Get the title of the current page.
-            String title = page.title();
+            // Print the text content of the message element
+            System.out.println(dragMessage.textContent());
 
-            // Print the title to the console.
-            System.out.println(title);
+            Thread.sleep(4000);
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();
