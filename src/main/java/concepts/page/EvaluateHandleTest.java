@@ -3,10 +3,10 @@ package concepts.page;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
-public class DragAndDropTest {
+public class EvaluateHandleTest {
 
     @Test
-    public void testPageDragAndDrop() {
+    public void testPageEvaluateHandle() {
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -32,17 +32,14 @@ public class DragAndDropTest {
             // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Navigate to the specified URL
-            page.navigate("https://letcode.in/dropable");
+            // Navigate to a local HTML file using Playwright
+            page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/list.html");
 
-            // Perform a drag-and-drop operation from the element with id "draggable" to the element with id "droppable"
-            page.dragAndDrop("#draggable", "#droppable");
+            // Execute JavaScript to set the value of an element with id 'username' to 'Playwright'
+            JSHandle handle = page.evaluateHandle("document.getElementById('username').value='Playwright'");
 
-            // Locate the message element after the drag-and-drop operation
-            Locator dragMessage = page.locator("//div[@id='droppable']//p");
-
-            // Print the text content of the message element
-            System.out.println(dragMessage.textContent());
+            // Print the JSON value of the handle to the console
+            System.out.println(handle.jsonValue());
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();

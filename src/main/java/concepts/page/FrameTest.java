@@ -3,10 +3,11 @@ package concepts.page;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
-public class DragAndDropTest {
+public class FrameTest {
 
     @Test
-    public void testPageDragAndDrop() {
+    public void testPageFrame() {
+
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -26,23 +27,23 @@ public class DragAndDropTest {
             // Launch the browser
             browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(false));
 
-            // Create a new isolated browser context
+            // Create a browser context with touch support
             BrowserContext browserContext = browser.newContext();
 
             // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Navigate to the specified URL
-            page.navigate("https://letcode.in/dropable");
+            // Navigate to a local HTML file using the file:// protocol
+            page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/iframe.html");
 
-            // Perform a drag-and-drop operation from the element with id "draggable" to the element with id "droppable"
-            page.dragAndDrop("#draggable", "#droppable");
+            // Get a reference to a specific frame with the name "MyFrame"
+            Frame frame = page.frame("MyFrame");
 
-            // Locate the message element after the drag-and-drop operation
-            Locator dragMessage = page.locator("//div[@id='droppable']//p");
+            // Locate an image within the frame using its alt attribute value "TeddyBears"
+            Locator teddyImage = frame.getByAltText("TeddyBears");
 
-            // Print the text content of the message element
-            System.out.println(dragMessage.textContent());
+            // Check if the Teddy image is visible on the page
+            System.out.println("Teddy Image Displayed? : " + teddyImage.isVisible());
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();

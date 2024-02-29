@@ -3,10 +3,11 @@ package concepts.page;
 import com.microsoft.playwright.*;
 import org.testng.annotations.Test;
 
-public class DragAndDropTest {
+public class GetByAltTextTest {
 
     @Test
-    public void testPageDragAndDrop() {
+    public void testPageGetByAltText() {
+
         // Initialize playwright variable to null
         Playwright playwright = null;
 
@@ -26,23 +27,20 @@ public class DragAndDropTest {
             // Launch the browser
             browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(false));
 
-            // Create a new isolated browser context
+            // Create a browser context with touch support
             BrowserContext browserContext = browser.newContext();
 
             // Create a new page within the context
             Page page = browserContext.newPage();
 
-            // Navigate to the specified URL
-            page.navigate("https://letcode.in/dropable");
+            // Navigate to a local HTML file using the file:// protocol
+            page.navigate("file:///D:/Environment_Collection/Intellij_Env/Playwright_Concepts/support/content.html");
 
-            // Perform a drag-and-drop operation from the element with id "draggable" to the element with id "droppable"
-            page.dragAndDrop("#draggable", "#droppable");
+            // Locate an image within the page using its alt attribute value "TeddyBears"
+            Locator teddyImage = page.getByAltText("TeddyBears");
 
-            // Locate the message element after the drag-and-drop operation
-            Locator dragMessage = page.locator("//div[@id='droppable']//p");
-
-            // Print the text content of the message element
-            System.out.println(dragMessage.textContent());
+            // Check if the Teddy image is visible on the page
+            System.out.println("Teddy Image Displayed? : " + teddyImage.isVisible());
         } catch (Exception ex) {
             // Print the exception stack trace for debugging
             ex.printStackTrace();
