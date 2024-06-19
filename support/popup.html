@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup After Refresh</title>
+</head>
+<body>
+  <button id="refreshButton">Refresh (Disabled)</button>
+  <button id="popupButton" disabled>Show Popup</button>
+
+  <script>
+    const refreshButton = document.getElementById('refreshButton');
+    const popupButton = document.getElementById('popupButton');
+
+    let startTime = null;
+
+    refreshButton.addEventListener('click', () => {
+      startTime = startTime || new Date(); // Start timer on first click
+      const currentTime = new Date();
+      const elapsedTime = (currentTime - startTime) / 1000; // Time in seconds
+
+      if (elapsedTime >= 120) { // Enable popup button after 2 minutes
+        popupButton.disabled = false;
+      } else {
+        refreshButton.textContent = `Refresh (${Math.floor(120 - elapsedTime)}s remaining)`; // Update refresh button text
+      }
+    });
+
+    popupButton.addEventListener('click', () => {
+      alert("Popup content!"); // Replace with your desired popup behavior (e.g., modal window)
+    });
+  </script>
+</body>
+</html>
